@@ -1,12 +1,12 @@
 {
   "domain": "arctic_spa",
   "name": "Arctic Spa",
-  "codeowners": [],
+  "codeowners": ["@markedgeca-create"],
   "config_flow": true,
-  "documentation": "https://github.com/REPLACE_ME/arctic-spa-homeassistant",
+  "documentation": "https://github.com/markedgeca-create/arctic-spa-homeassistant",
   "integration_type": "device",
   "iot_class": "cloud_polling",
-  "issue_tracker": "https://github.com/REPLACE_ME/arctic-spa-homeassistant/issues",
+  "issue_tracker": "https://github.com/markedgeca-create/arctic-spa-homeassistant/issues",
   "requirements": [],
   "version": "0.1.0"
 }
