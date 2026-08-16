@@ -8,6 +8,9 @@ except the status read, which is a GET.
 from __future__ import annotations
 
 import asyncio
+
+# Aliased because the request helper takes a parameter named `json`.
+import json as json_module
 import logging
 from typing import Any
 
@@ -77,13 +80,23 @@ class ArcticSpaClient:
                     body = await response.text()
                     raise ArcticSpaError(f"HTTP {response.status} from {path}: {body}")
 
-                if response.status == 204 or not response.content_length:
-                    # Control endpoints answer 200/202 with an empty body.
-                    text = await response.text()
-                    if not text.strip():
-                        return None
+                # Parse from the body itself rather than trusting Content-Length:
+                # the API answers chunked, so that header is often absent even
+                # when a full JSON document follows. Control endpoints reply
+                # 200/202 with a genuinely empty body.
+                raw = await response.text()
+                _LOGGER.debug(
+                    "%s %s -> HTTP %s, %d bytes", method, path, response.status, len(raw)
+                )
+                if not raw.strip():
                     return None
-                return await response.json(content_type=None)
+                try:
+                    return json_module.loads(raw)
+                except ValueError as err:
+                    raise ArcticSpaError(
+                        f"Non-JSON response from {path} "
+                        f"(HTTP {response.status}): {raw[:200]}"
+                    ) from err
         except TimeoutError as err:
             raise ArcticSpaConnectionError(f"Timeout talking to {path}") from err
         except asyncio.TimeoutError as err:  # pragma: no cover - py<3.11 alias

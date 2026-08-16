@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 from collections.abc import Mapping
 from hashlib import sha256
 from typing import TYPE_CHECKING, Any
@@ -36,6 +37,8 @@ from .const import (
 
 if TYPE_CHECKING:
     from . import ArcticSpaConfigEntry
+
+_LOGGER = logging.getLogger(__name__)
 
 STEP_USER_SCHEMA = vol.Schema(
     {
@@ -108,6 +111,9 @@ class ArcticSpaConfigFlow(ConfigFlow, domain=DOMAIN):
         except ArcticSpaConnectionError:
             return {"base": "cannot_connect"}
         except ArcticSpaError:
+            # The generic form is unhelpful on its own, so record what the API
+            # actually said - it lands in Settings > System > Logs.
+            _LOGGER.exception("Unexpected error validating the Arctic Spas API key")
             return {"base": "unknown"}
         return {}
 
