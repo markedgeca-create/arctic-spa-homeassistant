@@ -8,7 +8,7 @@
           "api_key": "API token"
         },
         "data_description": {
-          "api_key": "The token from https://myarcticspa.com/spa/SpaAPIManagement.aspx"
+          "api_key": "The token from myarcticspa.com's Spa API Management page"
         }
       },
       "reauth_confirm": {
