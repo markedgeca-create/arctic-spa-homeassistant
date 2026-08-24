@@ -92,14 +92,14 @@
       "filter_status": {
         "name": "Filter status",
         "state": {
-          "Idle": "Idle",
-          "Purge": "Purge",
-          "Filtering": "Filtering",
-          "Suspended": "Suspended",
-          "Overtemperature": "Overtemperature",
-          "Resuming": "Resuming",
-          "Boost": "Boost",
-          "Sanitize": "Sanitize"
+          "idle": "Idle",
+          "purge": "Purge",
+          "filtering": "Filtering",
+          "suspended": "Suspended",
+          "overtemperature": "Overtemperature",
+          "resuming": "Resuming",
+          "boost": "Boost",
+          "sanitize": "Sanitize"
         }
       },
       "orp": {
@@ -108,11 +108,11 @@
       "orp_status": {
         "name": "ORP status",
         "state": {
-          "LOW": "Low",
-          "CAUTION_LOW": "Caution low",
-          "OK": "OK",
-          "CAUTION_HIGH": "Caution high",
-          "HIGH": "High"
+          "low": "Low",
+          "caution_low": "Caution low",
+          "ok": "OK",
+          "caution_high": "Caution high",
+          "high": "High"
         }
       },
       "ph": {
@@ -121,11 +121,11 @@
       "ph_status": {
         "name": "pH status",
         "state": {
-          "LOW": "Low",
-          "CAUTION_LOW": "Caution low",
-          "OK": "OK",
-          "CAUTION_HIGH": "Caution high",
-          "HIGH": "High"
+          "low": "Low",
+          "caution_low": "Caution low",
+          "ok": "OK",
+          "caution_high": "Caution high",
+          "high": "High"
         }
       }
     },

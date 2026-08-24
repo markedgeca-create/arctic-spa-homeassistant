@@ -25,17 +25,18 @@ from . import ArcticSpaConfigEntry
 from .coordinator import ArcticSpaCoordinator
 from .entity import ArcticSpaEntity
 
-# Values the API documents for ph_status / orp_status and filter_status.
-CHEMISTRY_STATES = ["LOW", "CAUTION_LOW", "OK", "CAUTION_HIGH", "HIGH"]
+# Values the API documents for ph_status / orp_status and filter_status,
+# lower-cased to satisfy Home Assistant's translation key requirements.
+CHEMISTRY_STATES = ["low", "caution_low", "ok", "caution_high", "high"]
 FILTER_STATES = [
-    "Idle",
-    "Purge",
-    "Filtering",
-    "Suspended",
-    "Overtemperature",
-    "Resuming",
-    "Boost",
-    "Sanitize",
+    "idle",
+    "purge",
+    "filtering",
+    "suspended",
+    "overtemperature",
+    "resuming",
+    "boost",
+    "sanitize",
 ]
 
 
@@ -77,6 +78,7 @@ SENSORS: tuple[ArcticSpaSensorEntityDescription, ...] = (
         status_key="ph_status",
         device_class=SensorDeviceClass.ENUM,
         options=CHEMISTRY_STATES,
+        value_fn=lambda value: value.lower(),
     ),
     ArcticSpaSensorEntityDescription(
         key="orp_status",
@@ -84,6 +86,7 @@ SENSORS: tuple[ArcticSpaSensorEntityDescription, ...] = (
         status_key="orp_status",
         device_class=SensorDeviceClass.ENUM,
         options=CHEMISTRY_STATES,
+        value_fn=lambda value: value.lower(),
     ),
     ArcticSpaSensorEntityDescription(
         key="filter_status",
@@ -91,6 +94,7 @@ SENSORS: tuple[ArcticSpaSensorEntityDescription, ...] = (
         status_key="filter_status",
         device_class=SensorDeviceClass.ENUM,
         options=FILTER_STATES,
+        value_fn=lambda value: value.lower(),
     ),
     ArcticSpaSensorEntityDescription(
         key="filter_duration_sensor",
